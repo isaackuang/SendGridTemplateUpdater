@@ -1,0 +1,17 @@
+---
+kind: pipeline
+name: default
+steps:
+- name: node module install
+  image: isaackuang/node12
+  commands:
+   - yarn install
+- name: build Docker
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: isaackuang/SGTemplateUpdater
+    tags: latest
