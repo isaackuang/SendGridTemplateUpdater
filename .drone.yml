@@ -13,5 +13,5 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: isaackuang/SGTemplateUpdater
+    repo: isaackuang/sg-template-updater
     tags: latest
