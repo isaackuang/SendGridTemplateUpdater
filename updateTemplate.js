@@ -10,6 +10,7 @@ templateHandler = () => {
   }
 
   client.request(GetTemplates)
+    .catch((e) => {console.log(e)})
     .then(([response, body]) => {
       //console.log(response.statusCode);
       //console.log(response.body.templates);
@@ -24,6 +25,7 @@ templateHandler = () => {
           // console.log(templateInfo)
           updateTemplate(templateInfo)
       })
+      .value()
     })
 }
 
