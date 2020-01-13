@@ -12,17 +12,17 @@ templateHandler = () => {
   client.request(GetTemplates)
     .catch((e) => {console.log(e)})
     .then(([response, body]) => {
-      //console.log(response.statusCode);
-      //console.log(response.body.templates);
+      // console.log(response.statusCode);
+      // console.log(response.body.templates);
       _.chain(response.body.templates)
       .map( function (value) {
-        //  console.log(value)
+          // console.log(value)
           templateInfo = {
             templateId: _.get(value, 'id'),
             templateVersionId: _.get(value, 'versions[0].id'),
             templateName: _.get(value, 'name')
           } 
-          // console.log(templateInfo)
+         // console.log(templateInfo)
           updateTemplate(templateInfo)
       })
       .value()
@@ -34,7 +34,7 @@ updateTemplate = (templateInfo) => {
   const versionId = templateInfo.templateVersionId
   const fileName = `${templateInfo.templateName}.html`
   if (fs.existsSync(fileName)) {
-    console.log(`Update template: ${fileName}`)
+    console.log(`Updating template: ${fileName}`)
     var data = fs.readFileSync(fileName,'utf-8');
     const templateData = {
       "active": 1, 
@@ -51,7 +51,8 @@ updateTemplate = (templateInfo) => {
     // console.log(UpdateTemplate)
     client.request(UpdateTemplate)
       .catch((e) => {
-        console.log(e)
+        console.log(`Update failed: ${templateData.name}`)
+        console.log(e.response.body)
       })
   }
   else
